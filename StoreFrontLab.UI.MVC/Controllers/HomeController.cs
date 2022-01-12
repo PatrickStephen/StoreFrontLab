@@ -20,11 +20,20 @@ namespace StoreFrontLab.UI.MVC.Controllers
         }
 
         [HttpGet]
+        public ActionResult Shop()
+        {
+            ViewBag.Message = "Your shop page.";
+
+            return View();
+        }
+
+        [HttpGet]
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
 
             return View();
         }
+
     }
 }
