@@ -3,60 +3,61 @@
     ViewBag.Title = "Contact";
 }
 <section class="contact_section ">
-    <div class="container">
+    <div class="container py-5">
+        <div class="row py-5">
+            <form class="col-md-9 m-auto" method="post" role="form">
+                <div class="row">
+                    @using (Html.BeginForm())
+                    {
+                        @*<form id="contact" action="" method="post">*@
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-        <div class="row">
-            <div class="col-md-6">
-                @using (Html.BeginForm())
-                {
-                    @*<form id="contact" action="" method="post">*@
-                    @Html.AntiForgeryToken()
-                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
-                    <div class="row">
-                        <div class="col-md-12">
-                            <fieldset>
-                                @*<input name="name" type="text" class="form-control" id="name" placeholder="Your name..." required="">*@
-                                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", @placeholder = "Name" } })
-                                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
-                            </fieldset>
+                        <div class="row">
+                            <div class="form-group col-md-6 mb-3">
+                                <fieldset>
+                                    @*<input name="name" type="text" class="form-control" id="name" placeholder="Your name..." required="">*@
+                                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", @placeholder = "Name" } })
+                                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                                </fieldset>
+                            </div>
+                            <div class="form-group col-md-6 mb-3">
+                                <fieldset>
+                                    @*<input name="email" type="text" class="form-control" id="email" placeholder="Your email..." required="">*@
+                                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @placeholder = "Email" } })
+                                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                </fieldset>
+                            </div>
+                            <div class="mb-3">
+                                <fieldset>
+                                    @Html.EditorFor(model => model.Subject, new { htmlAttributes = new { @class = "form-control", @placeholder = "Subject" } })
+                                    @Html.ValidationMessageFor(model => model.Subject, "", new { @class = "text-danger" })
+                                </fieldset>
+                            </div>
+                            <div class="mb-3">
+                                <fieldset>
+                                    @*<textarea name="message" rows="6" class="form-control" id="message" placeholder="Your message..." required=""></textarea>*@
+                                    @Html.EditorFor(model => model.Message, new { htmlAttributes = new { @class = "form-control", @placeholder = "Please type your message here..." } })
+                                    @Html.ValidationMessageFor(model => model.Message, "", new { @class = "text-danger" })
+                                </fieldset>
+                            </div>
+                            <div class="col text-end mt-2">
+                                <fieldset>
+                                    <button type="submit" id="form-submit" class="btn btn-success btn-lg px-3">Send Message</button>
+                                </fieldset>
+                            </div>
                         </div>
-                        <div class="col-md-12">
-                            <fieldset>
-                                @*<input name="email" type="text" class="form-control" id="email" placeholder="Your email..." required="">*@
-                                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @placeholder = "Email" } })
-                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-                            </fieldset>
-                        </div>
-                        <div class="col-md-12">
-                            <fieldset>
-                                @Html.EditorFor(model => model.Subject, new { htmlAttributes = new { @class = "form-control", @placeholder = "Subject" } })
-                                @Html.ValidationMessageFor(model => model.Subject, "", new { @class = "text-danger" })
-                            </fieldset>
-                        </div>
-                        <div class="col-md-12">
-                            <fieldset>
-                                @*<textarea name="message" rows="6" class="form-control" id="message" placeholder="Your message..." required=""></textarea>*@
-                                @Html.EditorFor(model => model.Message, new { htmlAttributes = new { @class = "form-control", @placeholder = "Please type your message here..." } })
-                                @Html.ValidationMessageFor(model => model.Message, "", new { @class = "text-danger" })
-                            </fieldset>
-                        </div>
-                        <div class="col-md-12">
-                            <fieldset>
-                                <button type="submit" id="form-submit" class="button">Send Message</button>
-                            </fieldset>
-                        </div>
-                    </div>
-                    @*</form>*@
-                }
-            </div>
+                        @*</form>*@
+                    }
+                </div>
+            </form>
         </div>
     </div>
 </section>
 
 
 <!-- Start Contact -->
-<div class="container py-5">
+@*<div class="container py-5">
     <div class="row py-5">
         <form class="col-md-9 m-auto" method="post" role="form">
             <div class="row">
@@ -84,5 +85,5 @@
             </div>
         </form>
     </div>
-</div>
+</div>*@
 <!-- End Contact -->
