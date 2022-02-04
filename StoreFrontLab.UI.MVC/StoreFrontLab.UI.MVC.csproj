@@ -47,12 +47,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.2\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
@@ -184,6 +182,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ItemsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RolesAdminController.cs" />
     <Compile Include="Controllers\UserAdminController.cs" />
@@ -223,9 +222,12 @@
     <Content Include="Content\img\category_img_02.jpg" />
     <Content Include="Content\img\category_img_03.jpg" />
     <Content Include="Content\img\favicon.ico" />
+    <Content Include="Content\img\favicon.png" />
     <Content Include="Content\img\feature_prod_01.jpg" />
     <Content Include="Content\img\feature_prod_02.jpg" />
     <Content Include="Content\img\feature_prod_03.jpg" />
+    <Content Include="Content\img\Hogwarts.jpg" />
+    <Content Include="Content\img\hogwarts_crest_by_eberlins_d4prbz3-fullview.png" />
     <Content Include="Content\img\product_single_01.jpg" />
     <Content Include="Content\img\product_single_02.jpg" />
     <Content Include="Content\img\product_single_03.jpg" />
@@ -263,6 +265,22 @@
     <Content Include="Global.asax" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Content\webfonts\fa-brands-400.eot" />
+    <Content Include="Content\webfonts\fa-brands-400.ttf" />
+    <Content Include="Content\webfonts\fa-brands-400.woff" />
+    <Content Include="Content\webfonts\fa-brands-400.woff2" />
+    <Content Include="Content\webfonts\fa-regular-400.eot" />
+    <Content Include="Content\webfonts\fa-regular-400.ttf" />
+    <Content Include="Content\webfonts\fa-regular-400.woff" />
+    <Content Include="Content\webfonts\fa-regular-400.woff2" />
+    <Content Include="Content\webfonts\fa-solid-900.eot" />
+    <Content Include="Content\webfonts\fa-solid-900.ttf" />
+    <Content Include="Content\webfonts\fa-solid-900.woff" />
+    <Content Include="Content\webfonts\fa-solid-900.woff2" />
+    <Content Include="Content\webfonts\slick.eot" />
+    <Content Include="Content\webfonts\slick.ttf" />
+    <Content Include="Content\webfonts\slick.woff" />
+    <Content Include="configs\dbconnections.config" />
     <Content Include="_Archive\about.html" />
     <Content Include="_Archive\assets\css\bootstrap.min.css" />
     <Content Include="_Archive\assets\css\custom.css" />
@@ -326,22 +344,6 @@
     <Content Include="_Archive\index.html" />
     <Content Include="_Archive\shop-single.html" />
     <Content Include="_Archive\shop.html" />
-    <Content Include="Content\webfonts\fa-brands-400.eot" />
-    <Content Include="Content\webfonts\fa-brands-400.ttf" />
-    <Content Include="Content\webfonts\fa-brands-400.woff" />
-    <Content Include="Content\webfonts\fa-brands-400.woff2" />
-    <Content Include="Content\webfonts\fa-regular-400.eot" />
-    <Content Include="Content\webfonts\fa-regular-400.ttf" />
-    <Content Include="Content\webfonts\fa-regular-400.woff" />
-    <Content Include="Content\webfonts\fa-regular-400.woff2" />
-    <Content Include="Content\webfonts\fa-solid-900.eot" />
-    <Content Include="Content\webfonts\fa-solid-900.ttf" />
-    <Content Include="Content\webfonts\fa-solid-900.woff" />
-    <Content Include="Content\webfonts\fa-solid-900.woff2" />
-    <Content Include="Content\webfonts\slick.eot" />
-    <Content Include="Content\webfonts\slick.ttf" />
-    <Content Include="Content\webfonts\slick.woff" />
-    <Content Include="configs\dbconnections.config" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -402,6 +404,14 @@
     <Content Include="Views\Account\DisplayEmail.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
     <Content Include="Views\Shared\OriginalLayout.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Shop.cshtml" />
+    <Content Include="Views\Home\EmailConfirmation.cshtml" />
+    <Content Include="Views\Items\Create.cshtml" />
+    <Content Include="Views\Items\Delete.cshtml" />
+    <Content Include="Views\Items\Details.cshtml" />
+    <Content Include="Views\Items\Edit.cshtml" />
+    <Content Include="Views\Items\Index.cshtml" />
     <Content Include="_Archive\assets\webfonts\fa-brands-400.eot" />
     <Content Include="_Archive\assets\webfonts\fa-brands-400.ttf" />
     <Content Include="_Archive\assets\webfonts\fa-brands-400.woff" />
@@ -417,9 +427,6 @@
     <Content Include="_Archive\assets\webfonts\slick.eot" />
     <Content Include="_Archive\assets\webfonts\slick.ttf" />
     <Content Include="_Archive\assets\webfonts\slick.woff" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Shop.cshtml" />
-    <Content Include="Views\Home\EmailConfirmation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -432,6 +439,12 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\StoreFrontLab.DATA.EF\StoreFrontLab.DATA.EF.csproj">
+      <Project>{88677dcb-2e84-4331-919d-950e3534d8c7}</Project>
+      <Name>StoreFrontLab.DATA.EF</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

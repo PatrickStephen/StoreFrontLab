@@ -7,7 +7,8 @@
     <meta name="viewport" Content="width=device-width, initial-scale=1">
 
     <link rel="apple-touch-icon" href="~/Content/img/apple-icon.png">
-    <link rel="shortcut icon" type="image/x-icon" href="~/Content/img/favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="~/Content/img/favicon.png">
+
 
     @*<link rel="stylesheet" href="~/Content/css/bootstrap.min.css">
     <link rel="stylesheet" href="~/Content/css/templatemo.css">
@@ -48,11 +49,11 @@
     </nav>*@
     <!-- Close Top Nav -->
     <!-- Header -->
-    <nav class="navbar navbar-expand-lg navbar-light shadow">
+    <nav class="text-light navbar-expand-lg navbar-light shadow">
         <div class="container d-flex justify-~/Content-between align-items-center">
 
-            <a class="navbar-brand text-success logo h1 align-self-center" href="@Url.Action("Index","Home")">
-                Zay
+            <a class="navbar-brand text-light logo h1 align-self-center "href="@Url.Action("Index","Home")">
+                The Hogwarts Store
             </a>
 
             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#templatemo_main_nav" aria-controls="navbarSupported~/Content" aria-expanded="false" aria-label="Toggle navigation">
@@ -69,12 +70,25 @@
                             <a class="nav-link" href="@Url.Action("About","Home")">About</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="@Url.Action("Shop","Home")">Shop</a>
+                            <a class="nav-link" href="@Url.Action("Index","Items")">Shop</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="@Url.Action("Contact","Home")">Contact</a>
                         </li>
                     </ul>
+                    <ul class="nav navbar-nav d-flex justify-~/Content-between mx-lg-auto">
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li>
+                                <span class="opener">Admin Functions</span>
+                                <ul>
+                                    <li><a href="@Url.Action("Index","UsersAdmin")">Users Admin</a></li>
+                                    <li><a href="@Url.Action("Index","RolesAdmin")">Roles Admin</a></li>
+                                </ul>
+                            </li>
+                        }
+                    </ul>
+                    @Html.Partial("_LoginPartial")
                 </div>
                 <div class="navbar align-self-center d-flex">
                     <div class="d-lg-none flex-sm-fill mt-3 mb-4 col-7 col-sm-auto pr-3">
@@ -127,29 +141,29 @@
 @RenderBody()
 
     <!-- Start Footer -->
-    <footer class="bg-dark" id="tempaltemo_footer">
+    <footer class="footer" id="tempaltemo_footer">
         <div class="container">
             <div class="row">
 
-                <div class="col-md-4 pt-5">
-                    <h2 class="h2 text-success border-bottom pb-3 border-light logo">Zay Shop</h2>
+                <div class="col-md-6 pt-5">                   
+                    <h2 class="h2 text-light border-bottom pb-3 border-light logo">The Hogwarts Store</h2>
                     <ul class="list-unstyled text-light footer-link-list">
                         <li>
                             <i class="fas fa-map-marker-alt fa-fw"></i>
-                            123 Consectetur at ligula 10660
+                            521 Diagon Alley, London
                         </li>
-                        <li>
+                        @*<li>
                             <i class="fa fa-phone fa-fw"></i>
                             <a class="text-decoration-none" href="tel:010-020-0340">010-020-0340</a>
-                        </li>
+                        </li>*@
                         <li>
                             <i class="fa fa-envelope fa-fw"></i>
-                            <a class="text-decoration-none" href="mailto:info@company.com">info@company.com</a>
+                            <a class="text-decoration-none" href="mailto:info@company.com">mail@owl.com</a>
                         </li>
                     </ul>
                 </div>
 
-                <div class="col-md-4 pt-5">
+                @*<div class="col-md-4 pt-5">
                     <h2 class="h2 text-light border-bottom pb-3 border-light">Products</h2>
                     <ul class="list-unstyled text-light footer-link-list">
                         <li><a class="text-decoration-none" href="#">Luxury</a></li>
@@ -160,15 +174,12 @@
                         <li><a class="text-decoration-none" href="#">Gym Accessories</a></li>
                         <li><a class="text-decoration-none" href="#">Sport Shoes</a></li>
                     </ul>
-                </div>
+                </div>*@
 
-                <div class="col-md-4 pt-5">
+                <div class="col-md-6 pt-5">
                     <h2 class="h2 text-light border-bottom pb-3 border-light">Further Info</h2>
                     <ul class="list-unstyled text-light footer-link-list">
-                        <li><a class="text-decoration-none" href="#">Home</a></li>
                         <li><a class="text-decoration-none" href="#">About Us</a></li>
-                        <li><a class="text-decoration-none" href="#">Shop Locations</a></li>
-                        <li><a class="text-decoration-none" href="#">FAQs</a></li>
                         <li><a class="text-decoration-none" href="#">Contact</a></li>
                     </ul>
                 </div>
@@ -198,19 +209,22 @@
                 <div class="col-auto">
                     <label class="sr-only" for="subscribeEmail">Email address</label>
                     <div class="input-group mb-2">
-                        <input type="text" class="form-control bg-dark border-light" id="subscribeEmail" placeholder="Email address">
-                        <div class="input-group-text btn-success text-light">Subscribe</div>
+                        @*<input type="text" class="form-control bg-dark border-light" id="subscribeEmail" placeholder="Email address">
+                        <div class="input-group-text btn-success text-light">Return To Top</div>*@
+                        <a href="#" class="btn btn-secondary">
+                            Back To Top
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="w-100 bg-black py-3">
+        <div class="w-100 bg-secondary py-3">
             <div class="container">
                 <div class="row pt-2">
                     <div class="col-12">
                         <p class="text-left text-light">
-                            Copyright &copy; 2021 Company Name
+                            Copyright &copy; @DateTime.Now.Year - Patrick Stephen
                             | Designed by <a rel="sponsored" href="https://templatemo.com" target="_blank">TemplateMo</a>
                         </p>
                     </div>
