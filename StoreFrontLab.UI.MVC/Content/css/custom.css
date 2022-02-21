@@ -49,10 +49,13 @@ textarea {
 body {
    background-color: #800000;
 }
-#footer{
+/*.footer{
+    background-color: gray;
+}*/
+
+#backToTop{
     background-color: #800000;
 }
-
 
 tr{
     background-color: white;
@@ -64,3 +67,9 @@ tr:nth-child(even) {
 a{
     text-decoration: none;
 }
+
+#shop{
+    border: 2px solid;
+    border-radius: 5px;
+}
+

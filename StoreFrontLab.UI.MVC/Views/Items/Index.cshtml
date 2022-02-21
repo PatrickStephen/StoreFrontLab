@@ -4,8 +4,8 @@
     ViewBag.Title = "Index";
 }
 
-@*<h2>@ViewBag.Title</h2>*@
-<section class="bg-light">
+
+<section class="bg-light" id="shop">
     <div id="indexWrapper">
         @if (User.IsInRole("Admin"))
         {
@@ -15,75 +15,84 @@
 
         }
 
-        <table class="table table-striped table-bordered">
-            <tr>
-                <th class="col-md-1">
-
-                </th>
-                <th class="col-md-3">
-                    @Html.DisplayNameFor(model => model.ItemName)
-                </th>
-                <th class="col-md-1">
-                    @Html.DisplayNameFor(model => model.Price)
-                </th>
-                <th class="col-md-1">
-                    @Html.DisplayNameFor(model => model.Author)
-                </th>
-                @*<th class="col-md-2">
-                        @Html.DisplayNameFor(model => model.Description)
-                    </th>*@
-                <th class="col-md-1">
-                    @Html.DisplayNameFor(model => model.Category.CategoryType)
-                </th>
-                <th class="col-md-1">
-                    @Html.DisplayNameFor(model => model.Status.StatusName)
-                </th>
-                @if (User.IsInRole("Admin"))
-                {
-                    <th class="col-md-2"></th>
-                }
-            </tr>
-
-            @foreach (var item in Model)
-            {
+        <table class="table table-striped table-bordered" id="myTable">
+            <thead>
                 <tr>
-                    <td>
-                        <a href="@Url.Action("Details",new {id=item.ItemID})" title="@item.ItemName">
-                            <img src="~/Content/assets/images/Books/t_@item.ItemImage" alt="@item.ItemName" />
-                        </a>
-                        @*@Html.DisplayFor(modelItem => item.ItemImage)*@
-                    </td>
-                    <td>
-                        <a href="@Url.Action("Details", new { id = item.ItemID })" title="@item.ItemName">
-                            @Html.DisplayFor(modelItem => item.ItemName)
-                        </a>
-                      
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Price)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Author)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Category.CategoryType)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Status.StatusName)
-                    </td>
+                    <th class="col-md-1">
 
-                        <td class="text-right">
+                    </th>
+                    <th class="col-md-3">
+                        @Html.DisplayNameFor(model => model.ItemName)
+                    </th>
+                    <th class="col-md-1">
+                        @Html.DisplayNameFor(model => model.Price)
+                    </th>
+                    <th class="col-md-1">
+                        @Html.DisplayNameFor(model => model.Author)
+                    </th>
+                    @*<th class="col-md-2">
+                @Html.DisplayNameFor(model => model.Description)
+            </th>*@
+                    <th class="col-md-1">
+                        @Html.DisplayNameFor(model => model.Category.CategoryType)
+                    </th>
+                    <th class="col-md-1">
+                        @Html.DisplayNameFor(model => model.Status.StatusName)
+                    </th>
                     @if (User.IsInRole("Admin"))
                     {
+                        <th class="col-md-2"></th>
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            <a href="@Url.Action("Details",new {id=item.ItemID})" title="@item.ItemName">
+                                <img src="~/Content/img/t_@item.ItemImage" alt="@item.ItemName" />
+                            </a>
+                            @*@Html.DisplayFor(modelItem => item.ItemImage)*@
+                        </td>
+                        <td>
+                            <a href="@Url.Action("Details", new { id = item.ItemID })" title="@item.ItemName">
+                                @Html.DisplayFor(modelItem => item.ItemName)
+                            </a>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Price)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Author)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Category.CategoryType)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Status.StatusName)
+                        </td>
 
-                            @Html.ActionLink("Edit", "Edit", new { id = item.ItemID }, new { @class = "btn btn-secondary btn-sm" })
-                            @Html.ActionLink("Delete", "Delete", new { id = item.ItemID }, new { @class = "btn btn-danger btn-sm" })
+                        <td class="text-right">
+                            @if (User.IsInRole("Admin"))
+                            {
+
+                                @Html.ActionLink("Edit", "Edit", new { id = item.ItemID }, new { @class = "btn btn-secondary btn-sm d-flex justify-content-center" })
+                                @Html.ActionLink("Delete", "Delete", new { id = item.ItemID }, new { @class = "btn btn-danger btn-sm d-flex justify-content-center" })
                             }
 
                         </td>
                     </tr>
                 }
+            </tbody>
 
-                </table>
-            </div>
-        </section>
+        </table>
+    </div>
+</section>
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('#myTable').DataTable();//using datatables.net for a jquery search
+        });
+    </script>
+}

@@ -119,7 +119,6 @@
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
@@ -185,6 +184,7 @@
     <Compile Include="Controllers\ItemsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RolesAdminController.cs" />
+    <Compile Include="Controllers\ShoppingCartController.cs" />
     <Compile Include="Controllers\UserAdminController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -197,6 +197,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Utilities\ImageUtility.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\css\bootstrap.min.css" />
@@ -208,47 +209,31 @@
     <Content Include="Content\css\slick.min.css" />
     <Content Include="Content\css\templatemo.css" />
     <Content Include="Content\css\templatemo.min.css" />
-    <Content Include="Content\img\about-hero.svg" />
-    <Content Include="Content\img\ajax-loader.gif" />
-    <Content Include="Content\img\apple-icon.png" />
-    <Content Include="Content\img\banner_img_01.jpg" />
-    <Content Include="Content\img\banner_img_02.jpg" />
-    <Content Include="Content\img\banner_img_03.jpg" />
-    <Content Include="Content\img\brand_01.png" />
-    <Content Include="Content\img\brand_02.png" />
-    <Content Include="Content\img\brand_03.png" />
-    <Content Include="Content\img\brand_04.png" />
-    <Content Include="Content\img\category_img_01.jpg" />
-    <Content Include="Content\img\category_img_02.jpg" />
-    <Content Include="Content\img\category_img_03.jpg" />
-    <Content Include="Content\img\favicon.ico" />
+    <Content Include="Content\img\ChamberofSecrets.jpg" />
+    <Content Include="Content\img\DeathlyHallows.jpg" />
     <Content Include="Content\img\favicon.png" />
-    <Content Include="Content\img\feature_prod_01.jpg" />
-    <Content Include="Content\img\feature_prod_02.jpg" />
-    <Content Include="Content\img\feature_prod_03.jpg" />
+    <Content Include="Content\img\GobletofFire.jpg" />
+    <Content Include="Content\img\HalfBloodPrince.jpg" />
+    <Content Include="Content\img\harry-potter-hogwarts-scarf.jpg" />
     <Content Include="Content\img\Hogwarts.jpg" />
+    <Content Include="Content\img\HogwartsCloak.jpeg" />
+    <Content Include="Content\img\HogwartsMug.jpg" />
+    <Content Include="Content\img\HogwartsRESIZED.jpg" />
+    <Content Include="Content\img\HogwartsShirt.jpg" />
+    <Content Include="Content\img\HogwartsSockHat.jpg" />
+    <Content Include="Content\img\HogwartsTapestry.jpg" />
+    <Content Include="Content\img\HogwartsWand.jpg" />
     <Content Include="Content\img\hogwarts_crest_by_eberlins_d4prbz3-fullview.png" />
-    <Content Include="Content\img\product_single_01.jpg" />
-    <Content Include="Content\img\product_single_02.jpg" />
-    <Content Include="Content\img\product_single_03.jpg" />
-    <Content Include="Content\img\product_single_04.jpg" />
-    <Content Include="Content\img\product_single_05.jpg" />
-    <Content Include="Content\img\product_single_06.jpg" />
-    <Content Include="Content\img\product_single_07.jpg" />
-    <Content Include="Content\img\product_single_08.jpg" />
-    <Content Include="Content\img\product_single_09.jpg" />
-    <Content Include="Content\img\product_single_10.jpg" />
-    <Content Include="Content\img\shop_01.jpg" />
-    <Content Include="Content\img\shop_02.jpg" />
-    <Content Include="Content\img\shop_03.jpg" />
-    <Content Include="Content\img\shop_04.jpg" />
-    <Content Include="Content\img\shop_05.jpg" />
-    <Content Include="Content\img\shop_06.jpg" />
-    <Content Include="Content\img\shop_07.jpg" />
-    <Content Include="Content\img\shop_08.jpg" />
-    <Content Include="Content\img\shop_09.jpg" />
-    <Content Include="Content\img\shop_10.jpg" />
-    <Content Include="Content\img\shop_11.jpg" />
+    <Content Include="Content\img\insidestore.jpg" />
+    <Content Include="Content\img\insidestoreRESIZED.jpg" />
+    <Content Include="Content\img\NoImage.png" />
+    <Content Include="Content\img\olivandars.jpg" />
+    <Content Include="Content\img\olivandarsRESIZED.jpg" />
+    <Content Include="Content\img\OrderofthePheonix.jpg" />
+    <Content Include="Content\img\OrderofthePheonix2.jpg" />
+    <Content Include="Content\img\PrizonerofAzkaban.jpg" />
+    <Content Include="Content\img\SorcerersStone.jpg" />
+    <Content Include="Content\img\t_NoImage.png" />
     <Content Include="Content\js\bootstrap.bundle.min.js" />
     <Content Include="Content\js\custom.js" />
     <Content Include="Content\js\jquery-1.11.0.min.js" />
@@ -280,7 +265,9 @@
     <Content Include="Content\webfonts\slick.eot" />
     <Content Include="Content\webfonts\slick.ttf" />
     <Content Include="Content\webfonts\slick.woff" />
-    <Content Include="configs\dbconnections.config" />
+    <Content Include="configs\dbconnections.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="_Archive\about.html" />
     <Content Include="_Archive\assets\css\bootstrap.min.css" />
     <Content Include="_Archive\assets\css\custom.css" />
@@ -344,6 +331,7 @@
     <Content Include="_Archive\index.html" />
     <Content Include="_Archive\shop-single.html" />
     <Content Include="_Archive\shop.html" />
+    <Content Include="configs\AppSecretKeys.config" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -427,6 +415,7 @@
     <Content Include="_Archive\assets\webfonts\slick.eot" />
     <Content Include="_Archive\assets\webfonts\slick.ttf" />
     <Content Include="_Archive\assets\webfonts\slick.woff" />
+    <Content Include="Views\ShoppingCart\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

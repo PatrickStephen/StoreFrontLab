@@ -1,28 +1,36 @@
 ﻿@using Microsoft.AspNet.Identity
-@if (Request.IsAuthenticated)
-{
-    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
-    {
-        @Html.AntiForgeryToken()
+@*@using StoreFront.DATA.EF;*@
 
 
-        <li>
-            @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
-        </li>
-        <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+    <div>
+        @if (Request.IsAuthenticated)
+        {
 
-    }
-}
-else
-{
-    <ul class="nav navbar-nav d-flex justify-~/Content-between mx-lg-auto">
-        <li class="nav-item">
-            <a class="nav-link" href="@Url.Action("Register","Account")" id="registerLink">REGISTER <i class="fa fa-user-plus" aria-hidden="true"></i></a>
-            @*@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })*@
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="@Url.Action("Login","Account")" id="loginLink">LOGIN <i class="fa fa-sign-in" aria-hidden="true"></i></a>
-            @*@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })*@
-        </li>
-    </ul>
-}
+            using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+            {
+                @Html.AntiForgeryToken()
+
+                @*<ul class="nav navbar-nav d-flex justify-~/Content-between mx-lg-auto">*@
+                <div>
+                    @Html.ActionLink("Profile", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", @class = "dropdown-item" })
+                </div>
+                <div><a class="dropdown-item" href="javascript:document.getElementById('logoutForm').submit()"> Log off</a></div>
+
+                @*</ul>*@
+            }
+        }
+        else
+        {
+            @*<ul class="nav navbar-nav d-flex justify-~/Content-between mx-lg-auto">*@
+            <div>
+                <a class="dropdown-item" href="@Url.Action("Register","Account")" id="registerLink"><i class="fa fa-user-plus" aria-hidden="true">REGISTER </i></a>
+                @*@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })*@
+            </div>
+            <div>
+                <a class="dropdown-item" href="@Url.Action("Login","Account")" id="loginLink"><i class="fa fa-sign-in" aria-hidden="true">LOGIN</i></a>
+                @*@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })*@
+            </div>
+            @*</ul>*@
+        }
+    </div>
+

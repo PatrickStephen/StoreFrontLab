@@ -10,14 +10,15 @@
     <link rel="shortcut icon" type="image/x-icon" href="~/Content/img/favicon.png">
 
 
-    @*<link rel="stylesheet" href="~/Content/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/Content/css/bootstrap.min.css">
     <link rel="stylesheet" href="~/Content/css/templatemo.css">
-    <link rel="stylesheet" href="~/Content/css/custom.css">*@
-    @Styles.Render("~/Content/css")
+    <link rel="stylesheet" href="~/Content/css/custom.css">
+    @*@Styles.Render("~/Content/css")*@
 
     <!-- Load fonts style after rendering the layout styles -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
     <link rel="stylesheet" href="~/Content/css/fontawesome.min.css">
+    <link rel="stylesheet" href="//cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css" />
     <!--
 
     TemplateMo 559 Zay Shop
@@ -30,29 +31,29 @@
 <body>
     <!-- Start Top Nav -->
     @*<nav class="navbar navbar-expand-lg bg-dark navbar-light d-none d-lg-block" id="templatemo_nav_top">
-        <div class="container text-light">
-            <div class="w-100 d-flex justify-~/Content-between">
-                <div>
-                    <i class="fa fa-envelope mx-2"></i>
-                    <a class="navbar-sm-brand text-light text-decoration-none" href="mailto:info@company.com">info@company.com</a>
-                    <i class="fa fa-phone mx-2"></i>
-                    <a class="navbar-sm-brand text-light text-decoration-none" href="tel:010-020-0340">010-020-0340</a>
-                </div>
-                <div>
-                    <a class="text-light" href="https://fb.com/templatemo" target="_blank" rel="sponsored"><i class="fab fa-facebook-f fa-sm fa-fw me-2"></i></a>
-                    <a class="text-light" href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram fa-sm fa-fw me-2"></i></a>
-                    <a class="text-light" href="https://twitter.com/" target="_blank"><i class="fab fa-twitter fa-sm fa-fw me-2"></i></a>
-                    <a class="text-light" href="https://www.linkedin.com/" target="_blank"><i class="fab fa-linkedin fa-sm fa-fw"></i></a>
+            <div class="container text-light">
+                <div class="w-100 d-flex justify-~/Content-between">
+                    <div>
+                        <i class="fa fa-envelope mx-2"></i>
+                        <a class="navbar-sm-brand text-light text-decoration-none" href="mailto:info@company.com">info@company.com</a>
+                        <i class="fa fa-phone mx-2"></i>
+                        <a class="navbar-sm-brand text-light text-decoration-none" href="tel:010-020-0340">010-020-0340</a>
+                    </div>
+                    <div>
+                        <a class="text-light" href="https://fb.com/templatemo" target="_blank" rel="sponsored"><i class="fab fa-facebook-f fa-sm fa-fw me-2"></i></a>
+                        <a class="text-light" href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram fa-sm fa-fw me-2"></i></a>
+                        <a class="text-light" href="https://twitter.com/" target="_blank"><i class="fab fa-twitter fa-sm fa-fw me-2"></i></a>
+                        <a class="text-light" href="https://www.linkedin.com/" target="_blank"><i class="fab fa-linkedin fa-sm fa-fw"></i></a>
+                    </div>
                 </div>
             </div>
-        </div>
-    </nav>*@
+        </nav>*@
     <!-- Close Top Nav -->
     <!-- Header -->
     <nav class="text-light navbar-expand-lg navbar-light shadow">
         <div class="container d-flex justify-~/Content-between align-items-center">
 
-            <a class="navbar-brand text-light logo h1 align-self-center "href="@Url.Action("Index","Home")">
+            <a class="navbar-brand text-light logo h1 align-self-center " href="@Url.Action("Index","Home")">
                 The Hogwarts Store
             </a>
 
@@ -67,28 +68,45 @@
                             <a class="nav-link" href="@Url.Action("Index","Home")">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="@Url.Action("About","Home")">About</a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link" href="@Url.Action("Index","Items")">Shop</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="@Url.Action("Contact","Home")">Contact</a>
                         </li>
-                    </ul>
-                    <ul class="nav navbar-nav d-flex justify-~/Content-between mx-lg-auto">
+                        @*Got this from bootstrap https://getbootstrap.com/docs/4.3/components/navs/#using-dropdowns*@
+                        <li class="nav-item dropdown">
+                            <a id="dropdown" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Account</a>
+                            <ul class="dropdown-menu account-dropdown" style="background-color: dimgray;" aria-labelledby="dropdown">
+                                @Html.Partial("_LoginPartial")
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            @if (Session["cart"] != null &&
+                                ((Dictionary<int, StoreFrontLab.UI.MVC.Models.CartItemViewModel>)Session["cart"]).Count > 0
+                                )
+                            {
+                                <a class="nav-link" href="@Url.Action("Index","ShoppingCart")">Cart <i class="fa fa-shopping-cart"></i></a>
+                            }
+                            else
+                            {
+                                @Html.ActionLink("Cart", "Index", "ShoppingCart", new { @class = "nav-link" })
+                            }
+
+                        </li>
+                        @*<li class="nav navbar-nav d-flex justify-~/Content-between mx-lg-auto">*@
                         @if (User.IsInRole("Admin"))
                         {
-                            <li>
-                                <span class="opener">Admin Functions</span>
-                                <ul>
-                                    <li><a href="@Url.Action("Index","UsersAdmin")">Users Admin</a></li>
-                                    <li><a href="@Url.Action("Index","RolesAdmin")">Roles Admin</a></li>
+                            <li class="nav-item dropdown">
+                                <a id="dropdown" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Account</a>
+                                <ul class="dropdown-menu account-dropdown" style="background-color: dimgray;" aria-labelledby="dropdown">
+                                    <li class="dropdown-item"><a href="@Url.Action("Index","UsersAdmin")">Users Admin</a></li>
+                                    <li class="dropdown-item"><a href="@Url.Action("Index","RolesAdmin")">Roles Admin</a></li>
                                 </ul>
                             </li>
                         }
+                        @*@Html.Partial("_LoginPartial")*@
+                        @*</li>*@
                     </ul>
-                    @Html.Partial("_LoginPartial")
                 </div>
                 <div class="navbar align-self-center d-flex">
                     <div class="d-lg-none flex-sm-fill mt-3 mb-4 col-7 col-sm-auto pr-3">
@@ -103,18 +121,18 @@
                         <i class="fa fa-fw fa-search text-dark mr-2"></i>
                     </a>
                     @*<a class="nav-item">
-                        @if (Session["cart"] != null &&
-                            ((Dictionary<int, MVC3.UI.MVC.Models.CartItemViewModel>)Session["cart"]).Count > 0
-                            )
-                        {
-                            <a class="dropdown-item" href="/ShoppingCart/Index">Cart <i class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i></a>
-                        }
-                        else
-                        {
-                            @Html.ActionLink("Cart", "Index", "ShoppingCart")
-                        }
+                            @if (Session["cart"] != null &&
+                                ((Dictionary<int, MVC3.UI.MVC.Models.CartItemViewModel>)Session["cart"]).Count > 0
+                                )
+                            {
+                                <a class="dropdown-item" href="/ShoppingCart/Index">Cart <i class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i></a>
+                            }
+                            else
+                            {
+                                @Html.ActionLink("Cart", "Index", "ShoppingCart")
+                            }
 
-                    </a>*@
+                        </a>*@
                 </div>
             </div>
 
@@ -138,57 +156,56 @@
         </div>
     </div>
 
-@RenderBody()
+    <main class="container">@RenderBody()</main>
 
     <!-- Start Footer -->
-    <footer class="footer" id="tempaltemo_footer">
+    <footer class="bg-secondary" id="tempaltemo_footer">
         <div class="container">
             <div class="row">
 
-                <div class="col-md-6 pt-5">                   
-                    <h2 class="h2 text-light border-bottom pb-3 border-light logo">The Hogwarts Store</h2>
+                <div class="text-center pt-1">
+                    <h2 class="h2 text-light border-bottom pb-1 border-light logo">The Hogwarts Store</h2>
                     <ul class="list-unstyled text-light footer-link-list">
                         <li>
                             <i class="fas fa-map-marker-alt fa-fw"></i>
                             521 Diagon Alley, London
                         </li>
                         @*<li>
-                            <i class="fa fa-phone fa-fw"></i>
-                            <a class="text-decoration-none" href="tel:010-020-0340">010-020-0340</a>
-                        </li>*@
+                                <i class="fa fa-phone fa-fw"></i>
+                                <a class="text-decoration-none" href="tel:010-020-0340">010-020-0340</a>
+                            </li>*@
                         <li>
                             <i class="fa fa-envelope fa-fw"></i>
-                            <a class="text-decoration-none" href="mailto:info@company.com">mail@owl.com</a>
+                            <a class="text-decoration-none" href="mailto:patrickstephenit@yahoo.com">mail@owl.com</a>
                         </li>
                     </ul>
                 </div>
 
                 @*<div class="col-md-4 pt-5">
-                    <h2 class="h2 text-light border-bottom pb-3 border-light">Products</h2>
-                    <ul class="list-unstyled text-light footer-link-list">
-                        <li><a class="text-decoration-none" href="#">Luxury</a></li>
-                        <li><a class="text-decoration-none" href="#">Sport Wear</a></li>
-                        <li><a class="text-decoration-none" href="#">Men's Shoes</a></li>
-                        <li><a class="text-decoration-none" href="#">Women's Shoes</a></li>
-                        <li><a class="text-decoration-none" href="#">Popular Dress</a></li>
-                        <li><a class="text-decoration-none" href="#">Gym Accessories</a></li>
-                        <li><a class="text-decoration-none" href="#">Sport Shoes</a></li>
-                    </ul>
-                </div>*@
+                        <h2 class="h2 text-light border-bottom pb-3 border-light">Products</h2>
+                        <ul class="list-unstyled text-light footer-link-list">
+                            <li><a class="text-decoration-none" href="#">Luxury</a></li>
+                            <li><a class="text-decoration-none" href="#">Sport Wear</a></li>
+                            <li><a class="text-decoration-none" href="#">Men's Shoes</a></li>
+                            <li><a class="text-decoration-none" href="#">Women's Shoes</a></li>
+                            <li><a class="text-decoration-none" href="#">Popular Dress</a></li>
+                            <li><a class="text-decoration-none" href="#">Gym Accessories</a></li>
+                            <li><a class="text-decoration-none" href="#">Sport Shoes</a></li>
+                        </ul>
+                    </div>*@
 
-                <div class="col-md-6 pt-5">
-                    <h2 class="h2 text-light border-bottom pb-3 border-light">Further Info</h2>
-                    <ul class="list-unstyled text-light footer-link-list">
-                        <li><a class="text-decoration-none" href="#">About Us</a></li>
-                        <li><a class="text-decoration-none" href="#">Contact</a></li>
-                    </ul>
-                </div>
+                @*<div class="col-md-6 pt-5">
+                        <h2 class="h2 text-light border-bottom pb-3 border-light">Further Info</h2>
+                        <ul class="list-unstyled text-light footer-link-list">
+                            <li><a class="text-decoration-none" href="@Url.Action("Contact","Home")">Contact</a></li>
+                        </ul>
+                    </div>*@
 
             </div>
 
-            <div class="row text-light mb-4">
-                <div class="col-12 mb-3">
-                    <div class="w-100 my-3 border-top border-light"></div>
+            <div class="row text-light mb-1">
+                <div class="col-12">
+                    <div class="w-100 my-1 border-top border-light"></div>
                 </div>
                 <div class="col-auto me-auto">
                     <ul class="list-inline text-left footer-icons">
@@ -208,10 +225,10 @@
                 </div>
                 <div class="col-auto">
                     <label class="sr-only" for="subscribeEmail">Email address</label>
-                    <div class="input-group mb-2">
+                    <div class="input-group mb-1">
                         @*<input type="text" class="form-control bg-dark border-light" id="subscribeEmail" placeholder="Email address">
-                        <div class="input-group-text btn-success text-light">Return To Top</div>*@
-                        <a href="#" class="btn btn-secondary">
+                            <div class="input-group-text btn-success text-light">Return To Top</div>*@
+                        <a href="#" class="btn btn-color" id="backToTop">
                             Back To Top
                         </a>
                     </div>
@@ -219,9 +236,9 @@
             </div>
         </div>
 
-        <div class="w-100 bg-secondary py-3">
+        <div class="w-100 bg-secondary">
             <div class="container">
-                <div class="row pt-2">
+                <div class="row">
                     <div class="col-12">
                         <p class="text-left text-light">
                             Copyright &copy; @DateTime.Now.Year - Patrick Stephen
@@ -235,15 +252,26 @@
     </footer>
     <!-- End Footer -->
     <!-- Start Script -->
-    @RenderSection("scripts",required:false)
+    @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
-    @*<script src="~/Content/js/jquery-1.11.0.min.js"></script>
-    <script src="~/Content/js/jquery-migrate-1.2.1.min.js"></script>
-    <script src="~/Content/js/bootstrap.bundle.min.js"></script>
-    <script src="~/Content/js/templatemo.js"></script>
-    <script src="~/Content/js/custom.js"></script>*@
-
+    @RenderSection("scripts", required: false)
+    <script src="~/content/js/jquery-1.11.0.min.js"></script>
+        <script src="~/content/js/jquery-migrate-1.2.1.min.js"></script>
+        <script src="~/content/js/bootstrap.bundle.min.js"></script>
+        <script src="~/content/js/templatemo.js"></script>
+        <script src="~/content/js/custom.js"></script>
+    @*@Scripts.Render("~/bundles/template")*@
+    <script src="//cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
     <!-- End Script -->
+    <script>
+        $(function () {
+            $(".navbar .nav li a").each(function () {
+                if ($(this).attr('href') == window.location.pathname) {
+                    $(this).addClass('active');
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>

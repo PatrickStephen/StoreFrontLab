@@ -20,12 +20,8 @@ namespace StoreFrontLab.UI.MVC
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
-                      "~/Scripts/respond.js",
-                      "~/Content/js/jquery-1.11.0.min.js",
-                      "~/Content/js/jquery-migrate-1.2.1.min.js",
-                      "~/Content/js/bootstrap.bundle.min.js",
-                      "~/Content/js/templatemo.js",
-                      "~/Content/js/custom.js"));
+                      "~/Scripts/respond.js"
+                      ));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
@@ -33,6 +29,14 @@ namespace StoreFrontLab.UI.MVC
                       "~/Content/css/bootstrap.min.css",
                       "~/Content/css/templatemo.css",
                       "~/Content/css/custom.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/template").Include(
+                     
+                      "~/Content/js/jquery-1.11.0.min.js",
+                      "~/Content/js/jquery-migrate-1.2.1.min.js",
+                      "~/Content/js/bootstrap.bundle.min.js",
+                      "~/Content/js/templatemo.js",
+                      "~/Content/js/custom.js"));
         }
     }
 }

@@ -1,0 +1,81 @@
+﻿
+
+@model Dictionary<int, StoreFrontLab.UI.MVC.Models.CartItemViewModel>
+@{
+    ViewBag.Title = "Shopping Cart";
+    //Add some local variables for calculations on this page (ex: total cost, total # of items)
+    decimal? cartTotal = 0;
+    int totalCountOfItems = 0;
+}
+
+
+
+
+<h2 class="text-center">@ViewBag.Title</h2>
+
+@if (Model.Count == 0)
+{
+    <p class="alert alert-warning">
+        @ViewBag.Message
+    </p>
+}
+else
+{
+
+    <table class="table">
+        <tr>
+            <th>Item Image</th>
+            <th>Quantity</th>
+            <th>Title</th>
+            <th>Price</th>
+            <th>Total</th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <img src="~/Content/img/t_@item.Value.Product.ItemImage" alt="Item Image" title="@item.Value.Product.ItemName" />
+                </td>
+                <td>
+                    @using (Html.BeginForm("UpdateCart", "ShoppingCart", FormMethod.Post))
+                    {
+                        @Html.Hidden("ItemID", item.Key)
+                        @Html.TextBox("qty", item.Value.Qty, new { @class = "form-control", style = "max-width: 50px;display: inline;" })
+                        <input type="submit" value="Update Quantity" class="btn btn-success" />
+                    }
+
+                    @{
+                        //Calculate the running total for the items in the cart
+                        totalCountOfItems += item.Value.Qty;
+                    }
+
+                </td>
+                <td>@item.Value.Product.ItemName</td>
+                <td>@string.Format($"{item.Value.Product.Price:c}")</td>
+                <td>
+                    @* Calculate the line total & update running total variable (cartTotal) that keeps track of the cost of all items in the cart. *@
+                    @{
+                        decimal? lineTotal = item.Value.Product.Price * item.Value.Qty;
+                        cartTotal += lineTotal;
+                    }
+
+                    @string.Format($"{lineTotal:c}")
+                </td>
+                <td>
+                    @Html.ActionLink("Remove from Cart", "RemoveFromCart", new { id = item.Key, @class = "btn btn-danger" })
+                </td>
+            </tr>
+        }
+
+    <p class="alert alert-success text-center" style="font-size: 1.25em;">
+        You have @totalCountOfItems item@(totalCountOfItems == 1 ? "" : "s") in your cart.
+        Your total before taxes and shipping is @string.Format($"{cartTotal:c}").
+    </p>
+    </table>
+    <p class="text-right">
+        @Html.ActionLink("Back To Shopping", "Index", "Items", null, new { @class = "btn btn-secondary" })
+    </p>
+}
+
